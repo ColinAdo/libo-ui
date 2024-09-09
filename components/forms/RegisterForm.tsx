@@ -22,7 +22,7 @@ export default function RegisterForm() {
       required: true,
     },
     {
-      lebalText: "Email",
+      lebalText: "Email Address",
       labelId: "email",
       type: "email",
       value: email,
