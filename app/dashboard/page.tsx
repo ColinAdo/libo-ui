@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { List, Spinner } from "@/components/common";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
-import { toast } from "react-toastify";
 
 export default function Page() {
   const router = useRouter();
@@ -27,10 +26,6 @@ export default function Page() {
     );
   }
 
-  if (isError) {
-    toast.error("Please login");
-    router.push("/auth/login");
-  }
   return (
     <>
       <header className="bg-white shadow">
