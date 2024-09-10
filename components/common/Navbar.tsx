@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   Disclosure,
   DisclosureButton,
@@ -12,7 +11,6 @@ import { usePathname } from "next/navigation";
 import { useLogoutMutation } from "@/redux/features/authApiSlice";
 import { logout as setLogout } from "@/redux/features/authSlice";
 import { NavLink } from "@/components/common";
-import { TbRubberStamp } from "react-icons/tb";
 
 export default function Navbar() {
   const pathname = usePathname();
