@@ -1,46 +1,42 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import * as z from "zod";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { loginSchema } from "@/lib/schemas";
 import { useRouter } from "next/navigation";
-import { useLoginMutation } from "@/redux/features/authApiSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { setAuth } from "@/redux/features/authSlice";
-import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useLoginMutation } from "@/redux/features/authApiSlice";
 
 export default function useLogin() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [login, { isLoading }] = useLoginMutation();
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
-  const { email, password } = formData;
-
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    login({ email, password })
+  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    login(data)
       .unwrap()
       .then(() => {
         dispatch(setAuth());
-        toast.success("Logged in");
+        toast.success("Login successfully");
         router.push("/dashboard");
       })
-      .catch(() => {
-        toast.error("Failed to login");
+      .catch((err) => {
+        toast.error("Wrong email or password!");
       });
   };
+
   return {
-    email,
-    password,
     isLoading,
-    onChange,
+    form,
     onSubmit,
   };
 }
