@@ -1,32 +1,34 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { useResetPasswordMutation } from "@/redux/features/authApiSlice";
+import * as z from "zod";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { resetPasswordSchema } from "@/lib/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useResetPasswordMutation } from "@/redux/features/authApiSlice";
 
 export default function usePasswordReset() {
-  const [passwordReset, { isLoading }] = useResetPasswordMutation();
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
 
-  const [email, setEmail] = useState("");
+  const form = useForm<z.infer<typeof resetPasswordSchema>>({
+    resolver: zodResolver(resetPasswordSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    passwordReset(email)
+  const onSubmit = (data: z.infer<typeof resetPasswordSchema>) => {
+    resetPassword(data.email)
       .unwrap()
       .then(() => {
-        toast.success("Please check your email address to reset your password");
+        toast.success("Please check your email to reset your password");
       })
       .catch(() => {
-        toast.error("Failed to request password");
+        toast.error("Failed to send email");
       });
   };
+
   return {
-    email,
+    form,
     isLoading,
-    onChange,
     onSubmit,
   };
 }
