@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import Provider from "@/redux/Provider";
 import { Navbar, Footer } from "@/components/common";
 import { Setup } from "@/components/utils";
+import { Toaster } from "sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,6 +37,7 @@ export default function RootLayout({
           <Navbar />
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 my-8">
             {children}
+            <Toaster position="top-center" richColors />
           </div>
           <Footer />
         </Provider>
