@@ -3,6 +3,12 @@
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { List, Spinner } from "@/components/common";
 import { useRouter } from "next/navigation";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Libo | Dashboard",
+  description: "Libo dashboard page",
+};
 
 export default function Page() {
   const router = useRouter();
