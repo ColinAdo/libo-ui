@@ -1,5 +1,11 @@
 import AuthTabs from "@/components/auth/AuthTabs";
 import { SquareLibrary } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Libo | Login",
+  description: "Libo Login page",
+};
 
 export default function Page() {
   return (
