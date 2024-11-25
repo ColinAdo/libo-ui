@@ -1,6 +1,6 @@
-import AuthTabs from "@/components/auth/AuthTabs";
-import { SquareLibrary } from "lucide-react";
 import type { Metadata } from "next";
+import { SquareLibrary } from "lucide-react";
+import AuthTabs from "@/components/auth/AuthTabs";
 
 export const metadata: Metadata = {
   title: "Libo | Login",
@@ -16,7 +16,6 @@ export default function Page() {
           Libo
         </h2>
       </div>
-
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <AuthTabs />
       </div>
