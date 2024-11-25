@@ -16,7 +16,7 @@ export default function Page() {
               Libo application
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              This is a library application that allows you to react and chat
+              This is a library application that allows you to read and chat
               with your pdf, after somedays the file will be sent into your
               email address.
             </p>
