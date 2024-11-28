@@ -5,12 +5,12 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { usePathname } from "next/navigation";
-import { useLogoutMutation } from "@/redux/features/authApiSlice";
-import { logout as setLogout } from "@/redux/features/authSlice";
 import { NavLink } from "@/components/common";
+import { usePathname } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout as setLogout } from "@/redux/features/authSlice";
+import { useLogoutMutation } from "@/redux/features/authApiSlice";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function Navbar() {
   const pathname = usePathname();
