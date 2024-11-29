@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import PasswordResetForm from "@/components/auth/PasswordResetForm";
 import { SquareLibrary } from "lucide-react";
+import PasswordResetForm from "@/components/auth/PasswordResetForm";
 
 export const metadata: Metadata = {
   title: "Libo | Password reset",
