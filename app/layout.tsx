@@ -1,10 +1,10 @@
 import "@/styles/globals.css";
+import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Provider from "@/redux/Provider";
-import { Navbar, Footer } from "@/components/common";
 import { Setup } from "@/components/utils";
-import { Toaster } from "sonner";
+import { Navbar, Footer } from "@/components/common";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
