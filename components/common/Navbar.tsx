@@ -92,22 +92,19 @@ export default function Navbar() {
         ) : (
           <DropdownMenu>
             <DropdownMenuTrigger className="focus:outline-none">
-              <AlignJustify className="h-[1.2rem] w-[1.2rem]" />
+              <AlignJustify className="h-[1.2rem] w-[1.2rem] dark:text-white" />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>{user?.username}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link
-                  href="/dashboard/create/account"
-                  className="flex justify-between"
-                >
+                <Link href="/auth/login" className="flex justify-between">
                   <UserRoundPlus className="h-[1.2rem] w-[1.2rem]" />
                   <span className="ml-2">Sign Up</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="/" className="flex justify-between">
+                <Link href="/auth/login" className="flex justify-between">
                   <LogIn className="h-[1.2rem] w-[1.2rem]" />
                   <span className="ml-2">Sign In</span>
                 </Link>
