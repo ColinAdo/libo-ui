@@ -1,22 +1,38 @@
 "use client";
 
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from "@headlessui/react";
-import { NavLink } from "@/components/common";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { CreativeCommons } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { ThemeToggler } from "@/components/common";
+import {
+  LogOut,
+  BadgePlus,
+  UserRound,
+  LogIn,
+  UserRoundPlus,
+  AlignJustify,
+} from "lucide-react";
 import { logout as setLogout } from "@/redux/features/authSlice";
-import { useLogoutMutation } from "@/redux/features/authApiSlice";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  useLogoutMutation,
+  useRetrieveUserQuery,
+} from "@/redux/features/authApiSlice";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+// Stateless Function components (sfc)
 export default function Navbar() {
-  const pathname = usePathname();
   const dispatch = useAppDispatch();
   const [logout] = useLogoutMutation();
-
+  const { data: user } = useRetrieveUserQuery();
   const { isAuthenticated } = useAppSelector((state) => state.auth);
 
   const handleLogout = () => {
@@ -26,85 +42,81 @@ export default function Navbar() {
         dispatch(setLogout());
       });
   };
-
-  const isSelected = (path: string) => (pathname === path ? true : false);
-
-  const authLink = (isMobile: boolean) => (
-    <>
-      <NavLink
-        isSelected={isSelected("/dashboard")}
-        isMobile={isMobile}
-        href="/dashboard"
-      >
-        Dashboard
-      </NavLink>
-      <NavLink isMobile={isMobile} onClick={handleLogout}>
-        Logout
-      </NavLink>
-    </>
-  );
-  const guestLink = (isMobile: boolean) => (
-    <>
-      <NavLink
-        isSelected={isSelected("/auth/login")}
-        isMobile={isMobile}
-        href="/auth/login"
-      >
-        Login
-      </NavLink>
-      <NavLink
-        isSelected={isSelected("/auth/register")}
-        isMobile={isMobile}
-        href="/auth/register"
-      >
-        Register
-      </NavLink>
-    </>
-  );
-
   return (
-    <Disclosure as="nav" className="bg-gray-800">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Mobile menu button*/}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-              <span className="absolute -inset-0.5" />
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon
-                aria-hidden="true"
-                className="block h-6 w-6 group-data-[open]:hidden"
-              />
-              <XMarkIcon
-                aria-hidden="true"
-                className="hidden h-6 w-6 group-data-[open]:block"
-              />
-            </DisclosureButton>
-          </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex flex-shrink-0 items-center">
-              <NavLink
-                isBanner
-                href="/"
-                className="text-gray-300 font-medium rounded-md px-3 py-2"
-              >
-                Libo
-              </NavLink>
-            </div>
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4">
-                {isAuthenticated ? authLink(false) : guestLink(false)}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="text-black px-5 mt-4 flex justify-between">
+      {isAuthenticated ? (
+        <Link href="/dashboard">
+          <CreativeCommons className="dark:text-white" />
+        </Link>
+      ) : (
+        <Link href="/">
+          <CreativeCommons className="dark:text-white" />
+        </Link>
+      )}
 
-      <DisclosurePanel className="sm:hidden">
-        <div className="space-y-1 px-2 pb-3 pt-2">
-          {isAuthenticated ? authLink(true) : guestLink(true)}
-        </div>
-      </DisclosurePanel>
-    </Disclosure>
+      <div className="flex item-center">
+        {isAuthenticated && user?.username[0] ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger className="focus:outline-none">
+              <Avatar>
+                <AvatarFallback className="text-black bg-slate-300 font-bold">
+                  {user?.username[0]}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>{user?.username}</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Link href="/" className="flex justify-between">
+                  <UserRound className="h-[1.2rem] w-[1.2rem]" />
+                  <span className="ml-2">Profile</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link
+                  href="/dashboard/create/account"
+                  className="flex justify-between"
+                >
+                  <BadgePlus className="h-[1.2rem] w-[1.2rem]" />
+                  <span className="ml-2">Create</span>
+                </Link>
+              </DropdownMenuItem>
+              <ThemeToggler />
+              <DropdownMenuItem>
+                <LogOut className="h-[1.2rem] w-[1.2rem]" />
+                <button onClick={handleLogout}>Logout</button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <DropdownMenu>
+            <DropdownMenuTrigger className="focus:outline-none">
+              <AlignJustify className="h-[1.2rem] w-[1.2rem]" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>{user?.username}</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Link
+                  href="/dashboard/create/account"
+                  className="flex justify-between"
+                >
+                  <UserRoundPlus className="h-[1.2rem] w-[1.2rem]" />
+                  <span className="ml-2">Sign Up</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/" className="flex justify-between">
+                  <LogIn className="h-[1.2rem] w-[1.2rem]" />
+                  <span className="ml-2">Sign In</span>
+                </Link>
+              </DropdownMenuItem>
+              <ThemeToggler />
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+      </div>
+    </div>
   );
 }
