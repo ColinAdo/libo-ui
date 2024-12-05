@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import Provider from "@/redux/Provider";
 import { Setup } from "@/components/utils";
 import { Navbar, Footer } from "@/components/common";
+import { ThemeProvider } from "@/components/common/ThemeProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,15 +33,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Provider>
-          <Setup />
-          <Navbar />
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 my-8">
-            {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Provider>
+            <Setup />
+            <Navbar />
+            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 my-8">
+              {children}
+            </div>
+            <Footer />
             <Toaster position="top-center" richColors />
-          </div>
-          <Footer />
-        </Provider>
+          </Provider>
+        </ThemeProvider>
       </body>
     </html>
   );
