@@ -1,12 +1,11 @@
 import "@/styles/globals.css";
 import { Toaster } from "sonner";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import Provider from "@/redux/Provider";
+import { Inter } from "next/font/google";
 import { Setup } from "@/components/utils";
 import { Navbar, Footer } from "@/components/common";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
-import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
