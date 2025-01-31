@@ -6,17 +6,9 @@ import Provider from "@/redux/Provider";
 import { Setup } from "@/components/utils";
 import { Navbar, Footer } from "@/components/common";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
+import { Inter } from "next/font/google";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Libo",
@@ -31,24 +23,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={inter.className}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Provider>
-            <Setup />
-            <Navbar />
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 my-8">
+        <Provider>
+          <Setup />
+          <div className="mx-auto max-h-7xl px-2 sm:px-6 lg:px-8 mt-6">
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Navbar />
               {children}
-            </div>
-            <Footer />
-            <Toaster position="top-center" richColors />
-          </Provider>
-        </ThemeProvider>
+              <Toaster position="top-center" richColors />
+            </ThemeProvider>
+          </div>
+          <Footer />
+        </Provider>
       </body>
     </html>
   );
