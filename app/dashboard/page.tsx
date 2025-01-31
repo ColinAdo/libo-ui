@@ -1,43 +1,81 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { List, Spinner } from "@/components/common";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Card from "@/components/dashboard/Card";
+// import { useWebSocketContext } from "@/hooks/WebSocketContext";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
+import { PostsGrid } from "@/components/dashboard";
+import {
+  PageTitle,
+} from "@/components/dashboard";
+
+
+const posts = [
+  {
+    id: "1",
+    fileUrl: "/assets/demo.jpeg",
+    likes_count: 40,
+    bookmark_count: 50,
+    description: "description"
+  },
+  {
+    id: "2",
+    fileUrl: "/assets/demo.jpeg",
+    likes_count: 40,
+    bookmark_count: 50,
+    description: "description"
+  },
+  {
+    id: "3",
+    fileUrl: "/assets/demo.jpeg",
+    likes_count: 40,
+    bookmark_count: 50,
+    description: "description"
+  },
+  {
+    id: "4",
+    fileUrl: "/assets/demo.jpeg",
+    likes_count: 40,
+    bookmark_count: 50,
+    description: "description"
+  },
+  {
+    id: "5",
+    fileUrl: "/assets/demo.jpeg",
+    likes_count: 40,
+    bookmark_count: 50,
+    description: "description"
+  },
+
+];
+
 
 export default function Page() {
-  const router = useRouter();
-  const { data: user, isLoading, isError } = useRetrieveUserQuery();
-  const config = [
-    {
-      label: "Username",
-      value: user?.username,
-    },
-    {
-      label: "Email",
-      value: user?.email,
-    },
-  ];
+  const { data: user } = useRetrieveUserQuery();
+  // const { lastJsonMessage } = useWebSocketContext();
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center my-8">
-        <Spinner lg />
-      </div>
-    );
+  // useEffect(() => {
+  //   console.log("Updated realtimeMessages:", lastJsonMessage);
+  //   refetch();
+  //   refetchTransactions();
+  //   refetchAccountAnalytics();
+  //   refetchTransactionAnalytics();
+  // }, [lastJsonMessage]);
+
+  if (!user) {
+    return;
   }
 
   return (
-    <>
-      <header className="bg-white shadow">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            Dashboard
-          </h1>
-        </div>
-      </header>
-      <main className="mx-auto max-w-7xl py-6 my-8 sm:px-6 lg:px-8">
-        <List config={config} />
-      </main>
-    </>
+    <div className="flex flex-col gap-5 w-full">
+      <PageTitle title="Dashboard" />
+      <section>
+        {/* {accounts.map((account, i) => (
+          <Card key={i} accounts={[account]} />
+        ))} */}
+        <PostsGrid posts={posts} />
+      </section>
+    </div>
   );
 }
