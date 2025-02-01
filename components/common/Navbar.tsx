@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CreativeCommons } from "lucide-react";
+import { SquareLibrary } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { ThemeToggler } from "@/components/common";
 import {
@@ -46,11 +46,11 @@ export default function Navbar() {
     <div className="text-black px-5 mt-4 flex justify-between">
       {isAuthenticated ? (
         <Link href="/dashboard">
-          <CreativeCommons className="dark:text-white" />
+          <SquareLibrary className="dark:text-white" />
         </Link>
       ) : (
         <Link href="/">
-          <CreativeCommons className="dark:text-white" />
+          <SquareLibrary className="dark:text-white" />
         </Link>
       )}
 
