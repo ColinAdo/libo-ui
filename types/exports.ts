@@ -12,3 +12,13 @@ export type Posts = {
     bookmark_count: number;
     description: string;
 };
+
+export interface Book {
+    id: string
+    title: string
+    author: string
+    imageUrl: string
+    description: string
+    likeCount: number
+    bookmarkCount: number
+}
