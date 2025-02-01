@@ -28,7 +28,7 @@ export default function PostsGrid({ posts }: Props) {
                             src={post.fileUrl}
                             fill
                             alt="Post preview"
-                            className="object-cover -z-10 transition group-hover:filter group-hover:blur-[2px] group-hover:brightness-90"
+                            className="object-cover rounded-sm -z-10 transition group-hover:filter group-hover:blur-[2px] group-hover:brightness-90"
                         />
                         <div className="opacity-0 group-hover:opacity-100 flex transition items-center justify-center space-x-6">
                             {post.likes_count > 0 && (
@@ -46,7 +46,7 @@ export default function PostsGrid({ posts }: Props) {
                             )}
                         </div>
                     </Link>
-                    <div className="w-full text-white dark:text-black bg-black font-bold dark:bg-white">
+                    <div className="w-full rounded-sm text-white dark:text-black bg-black font-bold dark:bg-white">
                         <Link href={`/dashboard/p/${post.id}`} ><p className="mt-2 text-center">{post.description}</p> </Link>
                     </div>
                 </div>
