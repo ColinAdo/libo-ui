@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Document, Page, pdfjs } from "react-pdf";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 // Set up the worker for react-pdf
