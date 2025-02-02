@@ -36,7 +36,7 @@ export default function ProfileTabs({
     const pathname = usePathname();
 
     return (
-        <Tabs defaultValue="posts" className="pt-14 md:pt-32 pb-16">
+        <Tabs defaultValue="posts" className="pb-16">
             <TabsList className="p-px bg-zinc-300 dark:bg-neutral-800 h-px w-full gap-x-10">
                 {profileTabs
                     .filter((tab) => isCurrentUser || tab.href !== "saved")
