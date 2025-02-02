@@ -1,10 +1,10 @@
 "use client";
 
-import { PageTitle, ProfileTabs } from "@/components/dashboard";
-import { PostsGrid } from "@/components/dashboard";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Search } from 'lucide-react';
+import { Input } from "@/components/ui/input";
+import { PostsGrid } from "@/components/dashboard";
+import { PageTitle, ProfileTabs } from "@/components/dashboard";
 
 const posts = [
     {
