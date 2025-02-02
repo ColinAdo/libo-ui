@@ -68,7 +68,7 @@ export default function Navbar() {
               <DropdownMenuLabel>{user?.username}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link href="/" className="flex justify-between">
+                <Link href={`/dashboard/${user?.username}`} className="flex justify-between">
                   <UserRound className="h-[1.2rem] w-[1.2rem]" />
                   <span className="ml-2">Profile</span>
                 </Link>
