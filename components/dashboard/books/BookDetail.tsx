@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Book } from "@/types/exports"
 import { Heart, Bookmark, BookOpen } from "lucide-react"
+import Link from "next/link"
 
 interface BookDetailProps {
     book: Book
@@ -36,7 +37,7 @@ export default function BookDetail({ book }: BookDetailProps) {
                         </div>
                         <div className="flex items-center space-x-1">
                             <BookOpen className="w-5 h-5 text-blue-500" />
-                            <span className="text-gray-600">Read</span>
+                            <Link href={`/dashboard/read/${book.id}`}><span className="text-gray-600">Read</span></Link>
                         </div>
                     </div>
                 </div>
