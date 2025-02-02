@@ -1,13 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { HeartIcon, MessageCircle } from "lucide-react";
 import { Posts } from "@/types/exports";
+import { usePathname } from "next/navigation";
 
 interface Props {
     posts: Posts[];
 }
 
 export default function PostsGrid({ posts }: Props) {
+    const pathname = usePathname();
     if (posts?.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center space-y-3 max-w-3xl lg:max-w-4xl mx-auto pb-20">
@@ -46,9 +50,14 @@ export default function PostsGrid({ posts }: Props) {
                             )}
                         </div>
                     </Link>
-                    <div className="w-full rounded-sm text-white dark:text-black bg-black font-bold dark:bg-white">
-                        <Link href={`/dashboard/book/${post.id}`} ><p className="mt-2 text-center">{post.description}</p> </Link>
-                    </div>
+                    {pathname === "/dashboard" && (
+                        <>
+                            <div className="w-full rounded-sm text-white dark:text-black bg-black font-bold dark:bg-white">
+                                <Link href={`/dashboard/book/${post.id}`} ><p className="mt-2 text-center">{post.description}</p> </Link>
+                            </div>
+                        </>
+                    )}
+
                 </div>
             ))}
         </div>
