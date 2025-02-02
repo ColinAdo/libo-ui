@@ -1,5 +1,6 @@
 import { ProfileTabs } from "@/components/dashboard";
 import { PostsGrid } from "@/components/dashboard";
+import { PageTitle } from "@/components/dashboard";
 
 const posts = [
     {
@@ -35,6 +36,7 @@ const posts = [
 export default function Page() {
     return (
         <div>
+            <PageTitle title="Your profile" />
             <ProfileTabs isCurrentUser={true} username="ado" />
             <PostsGrid posts={posts} />
         </div>
