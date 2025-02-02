@@ -38,7 +38,13 @@ const posts = [
     },
 ];
 
-export default function Page() {
+interface Props {
+    params: {
+        username: string;
+    };
+}
+
+export default function Page({ params: { username } }: Props) {
     const [searchTerm, setSearchTerm] = useState("");
 
     const filteredPosts = posts.filter(post =>
@@ -48,7 +54,7 @@ export default function Page() {
     return (
         <div className="p-4">
             <div className="flex justify-between items-center mb-4">
-                <PageTitle title="Colin Books" />
+                <PageTitle title="Your Books" />
                 <div className="flex items-center gap-2">
                     <Search size={32} className="hidden sm:block" />
                     <Input
@@ -60,7 +66,7 @@ export default function Page() {
                     />
                 </div>
             </div>
-            <ProfileTabs isCurrentUser={true} username="ado" />
+            <ProfileTabs isCurrentUser={true} username={username} />
             <PostsGrid posts={filteredPosts} />
         </div>
     );
