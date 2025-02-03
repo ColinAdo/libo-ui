@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Card from "@/components/dashboard/Card";
 // import { useWebSocketContext } from "@/hooks/WebSocketContext";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { PostsGrid } from "@/components/dashboard";
