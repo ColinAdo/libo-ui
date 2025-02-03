@@ -34,7 +34,7 @@ export default function Sidebar() {
     }
 
     return (
-        <div className={`relative ${isCollapsed ? "min-w-[80px]" : "min-w-[160px]"} border-r px-3 pt-20 pb-10`}>
+        <div className={`relative ${isCollapsed ? "min-w-[80px]" : "min-w-[160px]"} mt-12 border-r px-3 pt-20 pb-10`}>
             {!mobilewidth && (
                 <div className="absolute top-7">
                     <Button

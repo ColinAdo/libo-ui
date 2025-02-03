@@ -43,7 +43,8 @@ export default function Navbar() {
       });
   };
   return (
-    <div className="text-black px-5 mt-4 flex justify-between">
+    <div className="text-black fixed w-full left-0 right-0 px-5 mt-2 flex justify-between items-center">
+
       {isAuthenticated ? (
         <Link href="/dashboard">
           <SquareLibrary className="dark:text-white" />

@@ -77,7 +77,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                                             }),
                                             "h-9 w-9",
                                             link.variant === "default" &&
-                                            "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white",
+                                            "dark:bg-muted bg-gray-200 text-black hover:bg-gray-300 dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white",
                                             !isCollapsed && "justify-start"
                                         )}
                                     >

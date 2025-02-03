@@ -26,7 +26,7 @@ export default function RootLayout({
       >
         <Provider>
           <Setup />
-          <div className="mx-auto max-h-7xl px-2 sm:px-6 lg:px-8 mt-6">
+          <div className="mx-auto max-h-7xl px-2 sm:px-6 lg:px-8 mt-0">
             <ThemeProvider
               attribute="class"
               defaultTheme="system"

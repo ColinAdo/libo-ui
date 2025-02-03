@@ -2,6 +2,8 @@ import { Read } from "@/components/dashboard/books";
 
 export default function Page() {
     return (
-        <Read />
+        <div className="mt-12">
+            <Read />
+        </div>
     );
 }

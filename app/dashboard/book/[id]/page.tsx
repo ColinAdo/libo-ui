@@ -22,6 +22,11 @@ async function getBookById(id: string): Promise<Book> {
 export default async function BookPage({ params }: { params: { id: string } }) {
     const book = await getBookById(params.id)
 
-    return <BookDetail book={book} />
+    return (
+        <div className="mt-12">
+
+            <BookDetail book={book} />
+        </div>
+    );
 }
 

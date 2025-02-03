@@ -73,7 +73,7 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-col gap-5 w-full">
+    <div className="flex flex-col gap-5 w-full mt-12">
       <div className="flex justify-between items-center mb-4">
         <PageTitle title="Books" />
         <div className="flex items-center gap-2">
