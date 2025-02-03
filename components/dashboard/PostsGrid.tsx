@@ -13,7 +13,7 @@ export default function PostsGrid({ posts }: Props) {
     if (posts?.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center space-y-3 max-w-3xl lg:max-w-4xl mx-auto pb-20">
-                <p className="font-semibold text-sm text-neutral-400">No more posts.</p>
+                <p className="font-semibold text-sm text-neutral-400">No book found.</p>
             </div>
         );
     }
