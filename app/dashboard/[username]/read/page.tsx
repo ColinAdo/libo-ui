@@ -36,7 +36,7 @@ export default function Page({ params: { username } }: Props) {
         post.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
     return (
-        <div className="p-4">
+        <div className="p-4 mt-12">
             <div className="flex justify-between items-center mb-4">
                 <PageTitle title="Your Books" />
                 <div className="flex items-center gap-2">
