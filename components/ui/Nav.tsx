@@ -75,14 +75,21 @@ export function Nav({ links, isCollapsed }: NavProps) {
                                                 variant: link.href === pathname ? "default" : "ghost",
                                                 size: isCollapsed ? "icon" : "sm",
                                             }),
-                                            "h-9 w-9",
-                                            link.variant === "default" &&
-                                            "dark:bg-muted bg-gray-200 text-black hover:bg-gray-300 dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white",
+                                            "h-9 w-full flex items-center gap-2 px-3 rounded-md transition-colors",
+                                            link.href === pathname
+                                                ? "bg-gray-900 text-white dark:bg-gray-700 dark:text-white" // Active link styles
+                                                : "text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-800 hover:text-black dark:hover:text-white",
                                             !isCollapsed && "justify-start"
                                         )}
                                     >
-                                        {linkContent}
+                                        <link.icon className="h-4 w-4" /> {/* Ensures icon takes the active text color */}
+                                        {!isCollapsed && (
+                                            <span className="text-inherit"> {/* This makes the text follow the color of the parent */}
+                                                {link.title}
+                                            </span>
+                                        )}
                                     </Link>
+
                                 </TooltipTrigger>
                                 {isCollapsed && (
                                     <TooltipContent side="right" className="flex items-center gap-4">
