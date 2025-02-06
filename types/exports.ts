@@ -22,3 +22,9 @@ export interface Book {
     likeCount: number
     bookmarkCount: number
 }
+
+export type CategoryType = {
+    id: number;
+    title: string;
+    book_count: number;
+}
