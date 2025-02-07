@@ -74,9 +74,8 @@ export default function Sidebar() {
             icon: getCategoryIcon(category.title),
             label: category.book_count > 0 ? category.book_count.toString() : "",
             variant: "ghost" as const,
-            href: `/categories/${category.id}`,
+            href: `/dashboard/categories/${category.id}`,
         })) || [];
-
 
     return (
         <div className={`relative ${isCollapsed ? "min-w-[80px]" : "min-w-[160px]"} mt-12 border-r px-3 pt-20 pb-10`}>
