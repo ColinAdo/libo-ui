@@ -8,7 +8,7 @@ import { useWindowWidth } from "@react-hook/window-size";
 import { useEffect, useState } from "react";
 
 import {
-    BadgePlus,
+    Upload,
     Book,
     Brain,
     Briefcase,
@@ -52,12 +52,16 @@ export default function Sidebar() {
             variant: "default",
             href: "/dashboard",
         },
-        {
-            title: "Create",
-            icon: BadgePlus,
-            variant: "ghost",
-            href: "/dashboard/create/account",
-        },
+        ...(user?.is_staff
+            ? ([
+                {
+                    title: "Upload",
+                    icon: Upload,
+                    variant: "ghost",
+                    href: "/dashboard/upload",
+                },
+            ] as const)
+            : []),
         {
             title: "Profile",
             label: "",
