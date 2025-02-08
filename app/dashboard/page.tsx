@@ -3,10 +3,7 @@
 import { useEffect, useState } from "react";
 // import { useWebSocketContext } from "@/hooks/WebSocketContext";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
-import { PostsGrid } from "@/components/dashboard";
-import {
-  PageTitle,
-} from "@/components/dashboard";
+import { PostsGrid, PageTitle } from "@/components/dashboard";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -91,22 +88,3 @@ export default function Page() {
     </div>
   );
 }
-
-// return (
-//   <div className="p-4">
-//       <div className="flex justify-between items-center mb-4">
-//           <PageTitle title="Your Books" />
-//           <div className="flex items-center gap-2">
-//               <Search size={32} className="hidden sm:block" />
-//               <Input
-//                   type="text"
-//                   placeholder="Search books..."
-//                   value={searchTerm}
-//                   onChange={(e) => setSearchTerm(e.target.value)}
-//                   className="w-[100] border border-gray-500 dark:border-white rounded p-2"
-//               />
-//           </div>
-//       </div>
-//       <PostsGrid posts={filteredPosts} />
-//   </div>
-// );
