@@ -1,10 +1,5 @@
+import { UserType } from "@/types/exports";
 import { apiSlice } from "../services/apiSlice";
-
-interface User {
-  username: string;
-  email: string;
-  profile_picture: string;
-}
 
 interface SocialAuthArgs {
   provider: string;
@@ -14,12 +9,12 @@ interface SocialAuthArgs {
 
 interface CreateUserResponse {
   success: boolean;
-  user: User;
+  user: UserType;
 }
 
 const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    retrieveUser: builder.query<User, void>({
+    retrieveUser: builder.query<UserType, void>({
       query: () => "/users/me/",
     }),
     socialAuthenticate: builder.mutation<CreateUserResponse, SocialAuthArgs>({

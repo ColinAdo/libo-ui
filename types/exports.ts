@@ -1,3 +1,9 @@
+export type UserType = {
+    username: string;
+    email: string;
+    is_staff: boolean;
+}
+
 export type AccountType = {
     id: string;
     name: string;
