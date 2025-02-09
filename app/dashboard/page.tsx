@@ -2,72 +2,24 @@
 
 import { useEffect, useState } from "react";
 // import { useWebSocketContext } from "@/hooks/WebSocketContext";
-import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { PostsGrid, PageTitle } from "@/components/dashboard";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-
-
-const posts = [
-  {
-    id: "1",
-    fileUrl: "/assets/demo.jpeg",
-    likes_count: 40,
-    bookmark_count: 50,
-    description: "Think and Grow Rich"
-  },
-  {
-    id: "2",
-    fileUrl: "/assets/demo.jpeg",
-    likes_count: 40,
-    bookmark_count: 50,
-    description: "Your next five moves"
-  },
-  {
-    id: "3",
-    fileUrl: "/assets/demo.jpeg",
-    likes_count: 40,
-    bookmark_count: 50,
-    description: "Rich dad poor dad"
-  },
-  {
-    id: "4",
-    fileUrl: "/assets/demo.jpeg",
-    likes_count: 40,
-    bookmark_count: 50,
-    description: "Atomic Habits"
-  },
-  {
-    id: "5",
-    fileUrl: "/assets/demo.jpeg",
-    likes_count: 40,
-    bookmark_count: 50,
-    description: "Good to Great"
-  },
-
-];
-
+import { useGetBooksQuery } from "@/redux/features/bookSlice";
 
 export default function Page() {
-  const { data: user } = useRetrieveUserQuery();
+  const { data: books } = useGetBooksQuery();
   const [searchTerm, setSearchTerm] = useState("");
-
-  const filteredPosts = posts.filter(post =>
-    post.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
   // const { lastJsonMessage } = useWebSocketContext();
+
+  const filteredPosts = books?.filter(book =>
+    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   // useEffect(() => {
   //   console.log("Updated realtimeMessages:", lastJsonMessage);
   //   refetch();
-  //   refetchTransactions();
-  //   refetchAccountAnalytics();
-  //   refetchTransactionAnalytics();
   // }, [lastJsonMessage]);
-
-  if (!user) {
-    return;
-  }
 
   return (
     <div className="flex flex-col gap-5 w-full mt-12">
@@ -84,7 +36,7 @@ export default function Page() {
           />
         </div>
       </div>
-      <PostsGrid posts={filteredPosts} />
+      <PostsGrid books={filteredPosts} />
     </div>
   );
 }
