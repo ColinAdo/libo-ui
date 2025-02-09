@@ -11,6 +11,30 @@ const accountSlice = apiSlice.injectEndpoints({
                 url: "/categories/",
             }),
         }),
+        uploadBook: builder.mutation({
+            query: (
+                {
+                    category,
+                    author,
+                    title,
+                    cover_image,
+                    pdf_file,
+                    description
+
+                }
+            ) => ({
+                url: "/posts/",
+                method: "POST",
+                body: {
+                    category,
+                    author,
+                    title,
+                    cover_image,
+                    pdf_file,
+                    description
+                },
+            }),
+        }),
     }),
 });
 
