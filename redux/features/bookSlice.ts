@@ -1,6 +1,7 @@
 import { apiSlice } from "../services/apiSlice";
 import {
     CategoryType,
+    BookType
 } from "@/types/exports";
 
 const accountSlice = apiSlice.injectEndpoints({
@@ -9,6 +10,11 @@ const accountSlice = apiSlice.injectEndpoints({
         getCategories: builder.query<CategoryType[], void>({
             query: () => ({
                 url: "/categories/",
+            }),
+        }),
+        getBooks: builder.query<BookType[], void>({
+            query: () => ({
+                url: "/books/",
             }),
         }),
         uploadBook: builder.mutation({
@@ -39,5 +45,6 @@ const accountSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-    useGetCategoriesQuery
+    useGetCategoriesQuery,
+    useGetBooksQuery
 } = accountSlice;
