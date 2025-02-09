@@ -5,6 +5,7 @@ import Provider from "@/redux/Provider";
 import { Inter } from "next/font/google";
 import { Setup } from "@/components/utils";
 import { Navbar, Footer } from "@/components/common";
+import { EdgeStoreProvider } from '../lib/edgestore';
 import { ThemeProvider } from "@/components/common/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -34,7 +35,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               <Navbar />
-              {children}
+              <EdgeStoreProvider>{children}</EdgeStoreProvider>
               <Toaster position="top-center" richColors />
             </ThemeProvider>
           </div>

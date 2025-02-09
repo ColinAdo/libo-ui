@@ -55,8 +55,10 @@ export const resetPasswordConfirmSchema = z.object({
 });
 
 export const UploadBookSchema = z.object({
-  accountName: z.string().min(1, "Account name is required."),
-  transactionType: z.string().min(1, "Transaction type is required."),
-  description: z.string().max(34, "Description must be at most 34 characters.").optional(),
-  amount: z.string().min(1, "Account amount is required."),
+  category: z.string().min(1, "Please select a category."),
+  author: z.string().min(1, "Author name is required."),
+  title: z.string().min(1, "Book title is required."),
+  cover_image: z.string().min(1, "Book cover image is required."),
+  pdf_file: z.string().url("Invalid file URL").min(1, "Book PDF file is required."),
+  description: z.string().min(1, "Book description is required."),
 });
