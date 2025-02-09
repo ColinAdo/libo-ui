@@ -1,4 +1,5 @@
 export type UserType = {
+    id: string;
     username: string;
     email: string;
     is_staff: boolean;
@@ -19,18 +20,39 @@ export type Posts = {
     description: string;
 };
 
-export interface Book {
-    id: string
-    title: string
-    author: string
-    imageUrl: string
-    description: string
-    likeCount: number
-    bookmarkCount: number
-}
-
 export type CategoryType = {
     id: number;
     title: string;
     book_count: number;
+}
+
+interface Likes {
+    id: string;
+    user: string;
+    book: string;
+}
+interface Bookmarks {
+    id: string;
+    user: string;
+    book: string;
+}
+
+interface Readers {
+    id: string;
+    username: string;
+}
+
+export type BookType = {
+    id: string;
+    title: string;
+    author: string;
+    pdf_file: string;
+    cover_image: string;
+    description: string;
+    likes: Likes[];
+    readers: Readers[];
+    bookmarks: Bookmarks[];
+    likes_count: number;
+    readers_count: number;
+    bookmarks_count: number;
 }
