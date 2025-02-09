@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UploadBookSchema } from "@/lib/schemas";
 import { useGetCategoriesQuery } from "@/redux/features/bookSlice";
@@ -27,6 +28,7 @@ import {
     FormMessage,
     FormControl,
 } from "@/components/ui/form";
+import MultiFileDropzoneUsage from "./MultiFileDropzoneUsage";
 
 export default function CreateTransactionForm() {
     const { data: categories } = useGetCategoriesQuery();
@@ -36,10 +38,12 @@ export default function CreateTransactionForm() {
     const form = useForm<z.infer<typeof UploadBookSchema>>({
         resolver: zodResolver(UploadBookSchema),
         defaultValues: {
-            accountName: "",
-            transactionType: "",
+            category: "",
+            author: "",
+            title: "",
+            cover_image: undefined,
+            pdf_file: undefined,
             description: "",
-            amount: "",
         },
     });
 
@@ -48,9 +52,9 @@ export default function CreateTransactionForm() {
         //   event: "create_transaction",
         //   data,
         // });
-        // toast.success("transaction created successfully");
         // router.push("/dashboard");
-        // console.log("Submitted data :", data)
+        toast.success("Book uploaded successfully");
+        console.log("Submitted data :", data)
     };
 
     if (!categories) {
@@ -63,11 +67,11 @@ export default function CreateTransactionForm() {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormField
                         control={form.control}
-                        name="accountName"
+                        name="category"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-white">
-                                    Account name
+                                    Book Category
                                 </FormLabel>
                                 <FormControl>
                                     <Select
@@ -92,7 +96,7 @@ export default function CreateTransactionForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="description"
+                        name="author"
                         render={({ field }) => (
                             <FormItem>
                                 <div className="flex justify-between items-center">
@@ -114,7 +118,7 @@ export default function CreateTransactionForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="description"
+                        name="title"
                         render={({ field }) => (
                             <FormItem>
                                 <div className="flex justify-between items-center">
@@ -136,7 +140,7 @@ export default function CreateTransactionForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="amount"
+                        name="cover_image"
                         render={({ field }) => (
                             <FormItem>
                                 <div className="flex justify-between items-center">
@@ -145,11 +149,10 @@ export default function CreateTransactionForm() {
                                     </FormLabel>
                                 </div>
                                 <FormControl>
-                                    <FileInput
-                                        id="coverImage"
-                                        accept="image/*"
-                                        required
-                                        onChange={(file) => field.onChange(file)}
+                                    <MultiFileDropzoneUsage
+                                        value={field.value || null}
+                                        onChange={(fileUrl) => field.onChange(fileUrl)}
+                                        name={field.name}
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -158,7 +161,7 @@ export default function CreateTransactionForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="amount"
+                        name="pdf_file"
                         render={({ field }) => (
                             <FormItem>
                                 <div className="flex justify-between items-center">
@@ -167,11 +170,32 @@ export default function CreateTransactionForm() {
                                     </FormLabel>
                                 </div>
                                 <FormControl>
-                                    <FileInput
-                                        id="pdfFile"
-                                        accept=".pdf"
-                                        required
-                                        onChange={(file) => field.onChange(file)}
+                                    <MultiFileDropzoneUsage
+                                        value={field.value || null} // Expecting a URL (string) or null
+                                        onChange={(fileUrl) => field.onChange(fileUrl)} // Store only the URL
+                                        name={field.name}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                            <FormItem>
+                                <div className="flex justify-between items-center">
+                                    <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-white">
+                                        Book Description
+                                    </FormLabel>
+                                </div>
+                                <FormControl>
+                                    <Textarea
+                                        placeholder="Type book description here"
+                                        className="resize-none"
+                                        {...field}
                                     />
                                 </FormControl>
                                 <FormMessage />
