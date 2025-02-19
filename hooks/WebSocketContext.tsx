@@ -17,7 +17,7 @@ interface WebSocketProviderProps {
 }
 
 export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({ children }) => {
-    const WS_URL = `${process.env.NEXT_PUBLIC_WS_HOST}/api/v1/accounts/`;
+    const WS_URL = `${process.env.NEXT_PUBLIC_WS_HOST}/api/v1/books/`;
 
     const { sendJsonMessage, lastJsonMessage: rawLastJsonMessage, readyState } = useWebSocket(WS_URL, {
         share: true,
