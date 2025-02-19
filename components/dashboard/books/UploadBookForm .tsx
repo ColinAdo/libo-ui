@@ -2,7 +2,6 @@
 
 import * as z from "zod";
 import { toast } from "sonner";
-import FileInput from "./FileInput"
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
