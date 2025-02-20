@@ -1,13 +1,36 @@
 import Image from "next/image"
 import { BookType } from "@/types/exports"
-import { Heart, Bookmark, BookOpen } from "lucide-react"
+import { Heart, Bookmark, BookOpen, HeartIcon } from "lucide-react"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { useWebSocketContext } from "@/hooks/WebSocketContext";
+import { toast } from "sonner"
+import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 
 interface Props {
     book: BookType
 }
 
 export default function BookDetail({ book }: Props) {
+    const { data: user } = useRetrieveUserQuery();
+    const { sendJsonMessage } = useWebSocketContext();
+
+    const isLiked = book.likes.some((like) => like.user === user?.id);
+    const isBookmarked = book.bookmarks.some((bookomark) => bookomark.user === user?.id);
+
+    const data = {
+        id: book.id,
+    }
+
+    const onSubmit = async () => {
+        sendJsonMessage({
+            event: "like_book",
+            data,
+        });
+        toast.success("You liked this book");
+        console.log("Submitted data :", data)
+    };
+
     return (
         <div className="max-w-4xl mx-auto p-4 shadow-lg dark:border rounded-lg">
             <div className="md:flex">
@@ -28,12 +51,14 @@ export default function BookDetail({ book }: Props) {
                     </div>
                     <div className="mt-6 flex items-center space-x-4">
                         <div className="flex items-center space-x-1">
-                            <Heart className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600">{book.likes_count}</span>
+                            <Button onClick={onSubmit} className="bg-transparent hover:bg-transparent">
+                                <Heart className={isLiked ? "text-gray-800 fill-pink-300" : "text-gray-800 fill-white"} />
+                            </Button>
+                            <span className="text-gray-400 font-bold">{book.likes_count}</span>
                         </div>
                         <div className="flex items-center space-x-1">
-                            <Bookmark className="w-5 h-5 text-blue-500" />
-                            <span className="text-gray-600">{book.bookmarks_count}</span>
+                            <Bookmark className={isBookmarked ? "text-gray-800 fill-pink-300" : "text-gray-800 fill-white"} />
+                            <span className="text-gray-400 font-bold">{book.bookmarks_count}</span>
                         </div>
                         <div className="flex items-center space-x-1">
                             <BookOpen className="w-5 h-5 text-blue-500" />
