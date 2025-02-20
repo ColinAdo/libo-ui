@@ -3,15 +3,13 @@
 import * as z from "zod";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UploadBookSchema } from "@/lib/schemas";
 import { useGetCategoriesQuery } from "@/redux/features/bookSlice";
-// import { useWebSocketContext } from "@/hooks/WebSocketContext";
-// import { useGetAccountsQuery } from "@/redux/features/accountSlice";
+import { useWebSocketContext } from "@/hooks/WebSocketContext";
 import {
     Select,
     SelectItem,
@@ -31,8 +29,7 @@ import MultiFileDropzoneUsage from "./MultiFileDropzoneUsage";
 
 export default function CreateTransactionForm() {
     const { data: categories } = useGetCategoriesQuery();
-    //   const { sendJsonMessage } = useWebSocketContext();
-    const router = useRouter();
+    const { sendJsonMessage } = useWebSocketContext();
 
     const form = useForm<z.infer<typeof UploadBookSchema>>({
         resolver: zodResolver(UploadBookSchema),
@@ -47,11 +44,11 @@ export default function CreateTransactionForm() {
     });
 
     const onSubmit = async (data: z.infer<typeof UploadBookSchema>) => {
-        // sendJsonMessage({
-        //   event: "create_transaction",
-        //   data,
-        // });
-        // router.push("/dashboard");
+        sendJsonMessage({
+            event: "create_book",
+            data,
+        });
+        form.reset();
         toast.success("Book uploaded successfully");
         console.log("Submitted data :", data)
     };
