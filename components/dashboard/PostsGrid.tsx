@@ -41,19 +41,14 @@ export default function PostsGrid({ books }: Props) {
                                 className="object-cover rounded-sm -z-10 transition group-hover:filter group-hover:blur-[2px] group-hover:brightness-90"
                             />
                             <div className="opacity-0 group-hover:opacity-100 flex transition items-center justify-center space-x-6">
-                                {book.likes_count > 0 && (
-                                    <div className="flex items-center font-bold space-x-1">
-                                        <HeartIcon className={isLiked ? "text-white fill-white" : "text-white fill-white"} />
-                                        <p className="text-black">{book.likes_count}</p>
-                                    </div>
-                                )}
-
-                                {book.bookmarks_count > 0 && (
-                                    <div className="flex items-center font-bold space-x-1">
-                                        <Bookmark className={isBookmarked ? "text-white fill-white" : "text-white fill-white"} />
-                                        <p className="text-black">{book.bookmarks_count}</p>
-                                    </div>
-                                )}
+                                <div className="flex items-center font-bold space-x-1">
+                                    <HeartIcon className={isLiked ? "text-gray-800 fill-pink-300" : "text-gray-800 fill-white"} />
+                                    <p className="text-black font-bold">{book.likes_count}</p>
+                                </div>
+                                <div className="flex items-center font-bold space-x-1">
+                                    <Bookmark className={isBookmarked ? "text-gray-800 fill-pink-300" : "text-gray-800 fill-white"} />
+                                    <p className="text-black font-bold">{book.bookmarks_count}</p>
+                                </div>
                             </div>
                         </Link>
                     </div>
