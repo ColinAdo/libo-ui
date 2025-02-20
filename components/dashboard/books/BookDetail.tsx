@@ -1,19 +1,19 @@
 import Image from "next/image"
-import { Book } from "@/types/exports"
+import { BookType } from "@/types/exports"
 import { Heart, Bookmark, BookOpen } from "lucide-react"
 import Link from "next/link"
 
-interface BookDetailProps {
-    book: Book
+interface Props {
+    book: BookType
 }
 
-export default function BookDetail({ book }: BookDetailProps) {
+export default function BookDetail({ book }: Props) {
     return (
         <div className="max-w-4xl mx-auto p-4 shadow-lg dark:border rounded-lg">
             <div className="md:flex">
                 <div className="md:flex-shrink-0">
                     <Image
-                        src={book.imageUrl || "/placeholder.svg"}
+                        src={book.cover_image || "/placeholder.svg"}
                         alt={`Cover of ${book.title}`}
                         width={300}
                         height={450}
@@ -29,11 +29,11 @@ export default function BookDetail({ book }: BookDetailProps) {
                     <div className="mt-6 flex items-center space-x-4">
                         <div className="flex items-center space-x-1">
                             <Heart className="w-5 h-5 text-red-500" />
-                            <span className="text-gray-600">{book.likeCount}</span>
+                            <span className="text-gray-600">{book.likes_count}</span>
                         </div>
                         <div className="flex items-center space-x-1">
                             <Bookmark className="w-5 h-5 text-blue-500" />
-                            <span className="text-gray-600">{book.bookmarkCount}</span>
+                            <span className="text-gray-600">{book.bookmarks_count}</span>
                         </div>
                         <div className="flex items-center space-x-1">
                             <BookOpen className="w-5 h-5 text-blue-500" />
