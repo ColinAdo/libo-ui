@@ -2,6 +2,8 @@
 
 import { BookDetail } from "@/components/dashboard/books"
 import { useRetrieveBookQuery } from "@/redux/features/bookSlice"
+import { useWebSocketContext } from "@/hooks/WebSocketContext";
+import { useEffect } from "react";
 
 interface Props {
     params: {
@@ -10,7 +12,12 @@ interface Props {
 }
 
 export default function BookPage({ params }: Props) {
-    const { data: book } = useRetrieveBookQuery(params.id);
+    const { lastJsonMessage } = useWebSocketContext();
+    const { data: book, refetch } = useRetrieveBookQuery(params.id);
+
+    useEffect(() => {
+        refetch();
+    }, [lastJsonMessage]);
 
     if (!book) {
         return null
