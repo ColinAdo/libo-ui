@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { SquareLibrary } from "lucide-react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { ThemeToggler } from "@/components/common";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   LogOut,
   BadgePlus,
