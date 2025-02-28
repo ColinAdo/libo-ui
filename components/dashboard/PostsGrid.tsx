@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { Bookmark, HeartIcon } from "lucide-react";
+import Image from "next/image";
 import { BookType } from "@/types/exports";
+import { Bookmark, HeartIcon } from "lucide-react";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 
 interface Props {
