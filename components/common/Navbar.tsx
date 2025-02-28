@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SquareLibrary } from "lucide-react";
 import { ThemeToggler } from "@/components/common";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout as setLogout } from "@/redux/features/authSlice";
 import {
   LogOut,
   BadgePlus,
@@ -12,7 +13,6 @@ import {
   UserRoundPlus,
   AlignJustify,
 } from "lucide-react";
-import { logout as setLogout } from "@/redux/features/authSlice";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   useLogoutMutation,
