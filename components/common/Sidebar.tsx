@@ -7,16 +7,16 @@ import { useWindowWidth } from "@react-hook/window-size";
 import { useGetCategoriesQuery } from "@/redux/features/bookSlice";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import {
-    Upload,
     Book,
+    Users,
     Brain,
+    Upload,
     Briefcase,
-    ChevronRight,
-    DollarSign,
-    LayoutDashboard,
-    LucideIcon,
     UserRound,
-    Users
+    LucideIcon,
+    DollarSign,
+    ChevronRight,
+    LayoutDashboard,
 } from "lucide-react";
 
 export default function Sidebar() {
