@@ -7,6 +7,10 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { logout as setLogout } from "@/redux/features/authSlice";
 import {
+  useLogoutMutation,
+  useRetrieveUserQuery,
+} from "@/redux/features/authApiSlice";
+import {
   LogOut,
   BadgePlus,
   UserRound,
@@ -14,10 +18,6 @@ import {
   UserRoundPlus,
   AlignJustify,
 } from "lucide-react";
-import {
-  useLogoutMutation,
-  useRetrieveUserQuery,
-} from "@/redux/features/authApiSlice";
 
 import {
   DropdownMenu,
