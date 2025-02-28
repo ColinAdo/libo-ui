@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { Bookmark, Heart, BookOpenCheck } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // import { ProfileData } from "@/lib/exports";
 
 const profileTabs = [
