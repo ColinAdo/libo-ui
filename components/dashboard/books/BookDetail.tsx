@@ -52,12 +52,12 @@ export default function BookDetail({ book }: Props) {
                     <div className="mt-6 flex items-center space-x-4">
                         <div className="flex items-center space-x-1">
                             <Button onClick={onSubmit} className="bg-transparent hover:bg-transparent">
-                                <Heart className={isLiked ? "text-gray-800 fill-pink-300" : "text-gray-800 fill-white"} />
+                                <Heart className={isLiked ? "text-red-800 fill-red-800" : "text-gray-800 fill-white"} />
                             </Button>
                             <span className="text-gray-400 font-bold">{book.likes_count}</span>
                         </div>
                         <div className="flex items-center space-x-1">
-                            <Bookmark className={isBookmarked ? "text-gray-800 fill-pink-300" : "text-gray-800 fill-white"} />
+                            <Bookmark className={isBookmarked ? "text-red-800 fill-red-800" : "text-gray-800 fill-white"} />
                             <span className="text-gray-400 font-bold">{book.bookmarks_count}</span>
                         </div>
                         <div className="flex items-center space-x-1">
