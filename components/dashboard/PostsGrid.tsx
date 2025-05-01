@@ -42,11 +42,11 @@ export default function PostsGrid({ books }: Props) {
                             />
                             <div className="opacity-0 group-hover:opacity-100 flex transition items-center justify-center space-x-6">
                                 <div className="flex items-center font-bold space-x-1">
-                                    <HeartIcon className={isLiked ? "text-red-800 fill-red-800" : "text-gray-800 fill-white"} />
+                                    <HeartIcon className={isLiked ? "text-green-800 fill-green-800" : "text-gray-800 fill-white"} />
                                     <p className="text-black font-bold">{book.likes_count > 0 ? book.likes_count : ""}</p>
                                 </div>
                                 <div className="flex items-center font-bold space-x-1">
-                                    <Bookmark className={isBookmarked ? "text-red-800 fill-red-800" : "text-gray-800 fill-white"} />
+                                    <Bookmark className={isBookmarked ? "text-green-800 fill-green-800" : "text-gray-800 fill-white"} />
                                     <p className="text-black font-bold">{book.bookmarks_count > 0 ? book.bookmarks_count : ""}</p>
                                 </div>
                             </div>
