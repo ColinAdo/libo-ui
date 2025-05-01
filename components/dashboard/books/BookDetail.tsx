@@ -27,9 +27,16 @@ export default function BookDetail({ book }: Props) {
             event: "like_book",
             data,
         });
-        console.log("Submitted data :", data)
     };
 
+    const onBookmark = async () => {
+        sendJsonMessage({
+            event: "bookmark_book",
+            data,
+        });
+        toast.success("You bookmarked this book");
+        console.log("Submitted data :", data)
+    };
 
     return (
         <div className="max-w-4xl mx-auto p-4 shadow-lg dark:border rounded-lg">
@@ -52,12 +59,14 @@ export default function BookDetail({ book }: Props) {
                     <div className="mt-6 flex items-center space-x-4">
                         <div className="flex items-center space-x-1">
                             <Button onClick={onLike} className="bg-transparent hover:bg-transparent">
-                                <Heart className={isLiked ? "text-red-800 fill-red-800" : "text-gray-800 fill-white"} />
+                                <Heart className={isLiked ? "text-green-800 fill-green-800" : "text-gray-800 fill-white"} />
                             </Button>
                             <span className="text-gray-400 font-bold">{book.likes_count}</span>
                         </div>
                         <div className="flex items-center space-x-1">
-                            <Bookmark className={isBookmarked ? "text-red-800 fill-red-800" : "text-gray-800 fill-white"} />
+                            <Button onClick={onBookmark} className="bg-transparent hover:bg-transparent">
+                                <Bookmark className={isBookmarked ? "text-green-800 fill-green-800" : "text-gray-800 fill-white"} />
+                            </Button>
                             <span className="text-gray-400 font-bold">{book.bookmarks_count}</span>
                         </div>
                         <div className="flex items-center space-x-1">
