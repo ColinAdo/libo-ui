@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/form";
 import MultiFileDropzoneUsage from "./MultiFileDropzoneUsage";
 
-export default function CreateTransactionForm() {
+export default function UploadBookForm() {
     const { data: categories } = useGetCategoriesQuery();
     const { sendJsonMessage } = useWebSocketContext();
 
