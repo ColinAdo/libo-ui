@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { buttonVariants } from "@/components/ui/button";
-// import { useGetAccountsQuery } from "@/redux/features/accountSlice";
 import {
     Tooltip,
     TooltipContent,
@@ -25,7 +24,6 @@ interface NavProps {
 }
 
 export function Nav({ links, isCollapsed }: NavProps) {
-    //   const { data: accounts } = useGetAccountsQuery();
     const pathname = usePathname();
 
     return (
@@ -44,26 +42,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                     )}
                 >
                     {links.map((link, index) => {
-                        const linkContent = (
-                            <>
-                                <link.icon className={cn("mr-2 h-4 w-4", isCollapsed && "h-4 w-4")} />
-                                {!isCollapsed && (
-                                    <>
-                                        {link.title}
-                                        {link.label && (
-                                            <span
-                                                className={cn(
-                                                    "ml-auto",
-                                                    link.variant === "default" && "text-background dark:text-white"
-                                                )}
-                                            >
-                                                {link.label}
-                                            </span>
-                                        )}
-                                    </>
-                                )}
-                            </>
-                        );
+                        const isActive = link.href === pathname;
 
                         return (
                             <Tooltip key={index} delayDuration={0}>
@@ -72,25 +51,30 @@ export function Nav({ links, isCollapsed }: NavProps) {
                                         href={link.href}
                                         className={cn(
                                             buttonVariants({
-                                                variant: link.href === pathname ? "default" : "ghost",
+                                                variant: isActive ? "default" : "ghost",
                                                 size: isCollapsed ? "icon" : "sm",
                                             }),
                                             "h-9 w-full flex items-center gap-2 px-3 rounded-md transition-colors",
-                                            link.href === pathname
-                                                ? "bg-gray-900 text-white dark:bg-gray-700 dark:text-white" // Active link styles
+                                            isActive
+                                                ? "bg-gray-900 text-white dark:bg-gray-700 dark:text-white"
                                                 : "text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-800 hover:text-black dark:hover:text-white",
                                             !isCollapsed && "justify-start"
                                         )}
                                     >
-                                        <link.icon className="h-4 w-4" /> {/* Ensures icon takes the active text color */}
+                                        <link.icon className="h-4 w-4" />
                                         {!isCollapsed && (
-                                            <span className="text-inherit"> {/* This makes the text follow the color of the parent */}
-                                                {link.title}
-                                            </span>
+                                            <>
+                                                <span className="text-inherit">{link.title}</span>
+                                                {link.label && (
+                                                    <span className="ml-auto text-xs rounded-full bg-gray-200 px-2 py-0.5 text-gray-700 dark:bg-gray-700 dark:text-white">
+                                                        {link.label}
+                                                    </span>
+                                                )}
+                                            </>
                                         )}
                                     </Link>
-
                                 </TooltipTrigger>
+
                                 {isCollapsed && (
                                     <TooltipContent side="right" className="flex items-center gap-4">
                                         {link.title}
