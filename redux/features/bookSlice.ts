@@ -22,6 +22,12 @@ const accountSlice = apiSlice.injectEndpoints({
                 url: `/books/${bookId}/`,
             }),
         }),
+
+        retrieveCategoryBook: builder.query<BookType[], string>({
+            query: (bookId) => ({
+                url: `/books/category/${bookId}/`,
+            }),
+        }),
         uploadBook: builder.mutation({
             query: (
                 {
@@ -53,4 +59,5 @@ export const {
     useGetBooksQuery,
     useRetrieveBookQuery,
     useGetCategoriesQuery,
+    useRetrieveCategoryBookQuery,
 } = accountSlice;
