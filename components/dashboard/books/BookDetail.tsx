@@ -22,14 +22,14 @@ export default function BookDetail({ book }: Props) {
         id: book.id,
     }
 
-    const onSubmit = async () => {
+    const onLike = async () => {
         sendJsonMessage({
             event: "like_book",
             data,
         });
-        toast.success("You liked this book");
         console.log("Submitted data :", data)
     };
+
 
     return (
         <div className="max-w-4xl mx-auto p-4 shadow-lg dark:border rounded-lg">
@@ -51,7 +51,7 @@ export default function BookDetail({ book }: Props) {
                     </div>
                     <div className="mt-6 flex items-center space-x-4">
                         <div className="flex items-center space-x-1">
-                            <Button onClick={onSubmit} className="bg-transparent hover:bg-transparent">
+                            <Button onClick={onLike} className="bg-transparent hover:bg-transparent">
                                 <Heart className={isLiked ? "text-red-800 fill-red-800" : "text-gray-800 fill-white"} />
                             </Button>
                             <span className="text-gray-400 font-bold">{book.likes_count}</span>
