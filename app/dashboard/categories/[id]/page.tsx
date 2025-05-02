@@ -14,7 +14,7 @@ export default function Page() {
     const id = Array.isArray(idParam) ? idParam[0] : idParam;
 
     const [searchTerm, setSearchTerm] = useState("");
-    const { data: books, isLoading } = useRetrieveCategoryBookQuery(id);
+    const { data: books } = useRetrieveCategoryBookQuery(id);
 
     const filteredPosts = books?.filter(book =>
         book.title.toLowerCase().includes(searchTerm.toLowerCase())
