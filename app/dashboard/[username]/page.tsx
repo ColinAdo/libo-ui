@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { PostsGrid } from "@/components/dashboard";
-import { PageTitle } from "@/components/dashboard";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { PageTitle } from "@/components/dashboard";
 import { ProfileTabs } from "@/components/dashboard";
 
 const posts = [
