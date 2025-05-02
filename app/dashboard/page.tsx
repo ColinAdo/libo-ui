@@ -8,9 +8,9 @@ import { useGetBooksQuery } from "@/redux/features/bookSlice";
 import { useWebSocketContext } from "@/hooks/WebSocketContext";
 
 export default function Page() {
-  const { data: books, refetch } = useGetBooksQuery();
   const [searchTerm, setSearchTerm] = useState("");
   const { lastJsonMessage } = useWebSocketContext();
+  const { data: books, refetch } = useGetBooksQuery();
 
   const filteredPosts = books?.filter(book =>
     book.title.toLowerCase().includes(searchTerm.toLowerCase())
