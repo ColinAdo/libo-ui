@@ -1,4 +1,3 @@
-import { PageTitle } from '@/components/dashboard';
 import { UploadBookForm } from '@/components/dashboard/books';
 import {
     Card,
