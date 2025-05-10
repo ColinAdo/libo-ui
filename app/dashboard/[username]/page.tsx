@@ -31,7 +31,7 @@ export default function Page({ params: { username } }: Props) {
     return (
         <div className="p-4 mt-12">
             <div className="flex justify-between items-center mb-4">
-                <PageTitle title="Your Books" />
+                <PageTitle title="Your Liked Books" />
                 <div className="flex items-center gap-2">
                     <Search size={32} className="hidden sm:block" />
                     <Input
