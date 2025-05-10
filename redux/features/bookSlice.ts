@@ -12,6 +12,11 @@ const accountSlice = apiSlice.injectEndpoints({
                 url: "/categories/",
             }),
         }),
+        getLikedBooks: builder.query<BookType[], void>({
+            query: () => ({
+                url: "/liked/books/",
+            }),
+        }),
         getBooks: builder.query<BookType[], void>({
             query: () => ({
                 url: "/books/",
@@ -60,4 +65,5 @@ export const {
     useRetrieveBookQuery,
     useGetCategoriesQuery,
     useRetrieveCategoryBookQuery,
+    useGetLikedBooksQuery,
 } = accountSlice;
