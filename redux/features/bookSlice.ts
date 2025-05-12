@@ -62,6 +62,14 @@ const accountSlice = apiSlice.injectEndpoints({
                 },
             }),
         }),
+
+        uploadPdf: builder.mutation({
+            query: (url) => ({
+                url: "/chatpdf/add/",
+                method: "POST",
+                body: { url },
+            }),
+        }),
     }),
 });
 
@@ -72,4 +80,5 @@ export const {
     useRetrieveCategoryBookQuery,
     useGetBookmarkedBooksQuery,
     useGetLikedBooksQuery,
+    useUploadPdfMutation,
 } = accountSlice;
