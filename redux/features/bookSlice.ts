@@ -70,6 +70,13 @@ const accountSlice = apiSlice.injectEndpoints({
                 body: { url },
             }),
         }),
+        askAi: builder.mutation({
+            query: ({ sourceId, question }) => ({
+                url: "/chatpdf/ask/",
+                method: "POST",
+                body: { sourceId, question },
+            }),
+        }),
     }),
 });
 
@@ -81,4 +88,5 @@ export const {
     useGetBookmarkedBooksQuery,
     useGetLikedBooksQuery,
     useUploadPdfMutation,
+    useAskAiMutation,
 } = accountSlice;
