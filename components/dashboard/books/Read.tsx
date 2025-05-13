@@ -11,7 +11,7 @@ import { useSearchParams } from "next/navigation";
 import { useAskAiMutation } from "@/redux/features/bookSlice";
 import { toast } from "sonner";
 import { useWebSocketContext } from "@/hooks/WebSocketContext";
-
+import ReactMarkdown from "react-markdown";
 
 // Set up the worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -44,15 +44,19 @@ export default function PDFChat({ id }: Props) {
         }
     }, [lastJsonMessage]);
 
-
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+
+        if (!input.trim()) return;
+
+        // Show user's question immediately
+        setChat((prev) => [...prev, { role: "user", content: input }]);
+
         askAi({ sourceId, question: input })
             .unwrap()
             .then(() => {
                 setInput("");
             })
-
             .catch((error) => {
                 toast.error("Failed to load AI response. Please try again.");
                 console.error("Error:", error);
@@ -83,18 +87,19 @@ export default function PDFChat({ id }: Props) {
             {/* Chat Interface */}
             <div className="md:w-[40%] w-full p-4 flex flex-col">
                 <ScrollArea className="flex-grow mb-4 h-[300px] md:h-auto overflow-y-auto">
+
                     {chat.map((message, index) => (
                         <div key={index} className={`mb-2 ${message.role === "user" ? "text-right" : "text-left"}`}>
-                            <span
-                                className={`inline-block p-2 rounded-lg ${message.role === "user"
-                                    ? "bg-blue-500 text-black"
-                                    : "dark:text-white"
+                            <div
+                                className={`prose prose-sm dark:prose-invert p-2 rounded-lg inline-block max-w-[80%] ${message.role === "user" ? "bg-gray-100 dark:bg-gray-700 dark:text-white" : " "
                                     }`}
                             >
-                                {message.content}
-                            </span>
+                                <ReactMarkdown>{message.content}</ReactMarkdown>
+                            </div>
                         </div>
                     ))}
+
+
                     <div ref={bottomRef} />
                 </ScrollArea>
                 <form onSubmit={handleSubmit} className="flex gap-2">
