@@ -82,11 +82,11 @@ const accountSlice = apiSlice.injectEndpoints({
 
 export const {
     useGetBooksQuery,
+    useAskAiMutation,
     useRetrieveBookQuery,
     useGetCategoriesQuery,
     useRetrieveCategoryBookQuery,
     useGetBookmarkedBooksQuery,
     useGetLikedBooksQuery,
     useUploadPdfMutation,
-    useAskAiMutation,
 } = accountSlice;
