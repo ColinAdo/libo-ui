@@ -1,18 +1,24 @@
-import Image from "next/image"
-import { BookType } from "@/types/exports"
-import { Heart, Bookmark, BookOpen, HeartIcon } from "lucide-react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { Spinner } from "@/components/common";
+import { Button } from "@/components/ui/button";
 import { useWebSocketContext } from "@/hooks/WebSocketContext";
-import { toast } from "sonner"
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
+import { useUploadPdfMutation } from "@/redux/features/bookSlice";
+import { BookType } from "@/types/exports";
+import { Bookmark, BookOpen, Heart } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface Props {
     book: BookType
 }
 
 export default function BookDetail({ book }: Props) {
+    const router = useRouter();
     const { data: user } = useRetrieveUserQuery();
+    const [uploadPdf, { isLoading }] = useUploadPdfMutation();
     const { sendJsonMessage } = useWebSocketContext();
 
     const isLiked = book.likes.some((like) => like.user === user?.id);
@@ -36,6 +42,17 @@ export default function BookDetail({ book }: Props) {
         });
         toast.success("You bookmarked this book");
         console.log("Submitted data :", data)
+    };
+
+    const handleReadClick = async () => {
+        try {
+            const response = await uploadPdf(book.pdf_file).unwrap(); // response = { sourceId: "xyz" }
+            const sourceId = response.sourceId;
+            router.push(`/dashboard/read/${book.id}?sourceId=${sourceId}`);
+        } catch (error) {
+            console.error("Error uploading PDF:", error);
+            toast.error("Failed to load PDF chat. Please try again.");
+        }
     };
 
     return (
@@ -69,10 +86,18 @@ export default function BookDetail({ book }: Props) {
                             </Button>
                             <span className="text-gray-400 font-bold">{book.bookmarks_count}</span>
                         </div>
-                        <div className="flex items-center space-x-1">
+
+                        <div className="flex items-center space-x-1 cursor-pointer" onClick={handleReadClick}>
+                            <BookOpen className="w-5 h-5 text-blue-500" />
+                            <span className="text-gray-600">
+                                {isLoading ? <Spinner sm /> : "Read"}
+                            </span>
+                        </div>
+
+                        {/* <div className="flex items-center space-x-1">
                             <BookOpen className="w-5 h-5 text-blue-500" />
                             <Link href={`/dashboard/read/${book.id}`}><span className="text-gray-600">Read</span></Link>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
